@@ -21,7 +21,6 @@ export default class ContactForm extends Component {
   };
 
   render() {
-    const { onInputChange, handleAddContact } = this.props;
     const  name = this.state.name;
     const number = this.state.number;
 
