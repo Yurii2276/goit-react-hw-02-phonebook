@@ -4,33 +4,42 @@ import css from './ContactForm.module.css';
 
 export default class ContactForm extends Component {
   render() {
-    const { name, onInputChange, handleAddContact } = this.props;
+    const { name, number, onInputChange, handleAddContact } = this.props;
 
     return (
-      <div>
-        <h2 className={css.titlePfonebook}>Phonebook</h2>
+      <form className={css.contactContainer} onSubmit={handleAddContact}>
+       
         <label htmlFor="" className={css.InputContainer}>
           <span className={css.inputtitle}>Name</span>
           <input
             onChange={onInputChange}
-            name="name"
+            name='name'
             value={name}
             className={css.inputFormStyle}
-            type="text"
+            type='text'
             required
           />
         </label>
-        <button onClick={handleAddContact} className={css.btnAddContact} type="button">
+
+        <label htmlFor="" className={css.InputContainer}>
+          <span className={css.inputtitle}>Number</span>
+          <input
+            onChange={onInputChange}
+            name='number'
+            value={number}
+            className={css.inputFormStyle}
+            type='tel'
+            required
+          />
+        </label>
+
+        <button
+          className={css.btnAddContact}
+          type="submit"
+        >
           Add contact
         </button>
-
-        <h2 className={css.titlePfonebook}>Contacts</h2>
-
-        <ul>
-          <li></li>
-          <li></li>
-        </ul>
-      </div>
+      </form>
     );
   }
 }
