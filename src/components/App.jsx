@@ -15,8 +15,8 @@ export class App extends Component {
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
     filter: '',
-    // name: '',
-    // number: ''
+    name: '',
+    number: ''
   }
 
   onInputChange = event => {
@@ -69,9 +69,9 @@ export class App extends Component {
 
         <h2 className={css.title}>Contacts</h2>
 
-        {/* <Filter filter={this.state.filter} filterByName={this.filterByName}/>
+        <Filter filter={this.state.filter} filterByName={this.filterByName}/>
 
-        <ContactList contacts={filteredContacts}/> */}
+        <ContactList contacts={filteredContacts}/>
 
 
       </div>
