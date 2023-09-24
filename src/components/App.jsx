@@ -15,34 +15,37 @@ export class App extends Component {
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
     filter: '',
-    name: '',
-    number: ''
-  }
-
-  onInputChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleAddContact = event => {
-    event.preventDefault();
+  onInputChange = (event, fieldName) => {
+    this.setState({ [fieldName]: event.target.value });
+  };
 
-    const { name, number } = this.state;
+  handleAddContact = (event, name, number) => {
+    event.preventDefault();
 
     if (name.trim() === '' || number.trim() === '') {
       alert('Please enter name and telephone number!');
       return;
-    }
+    };
+
     const newContact = {
       id: nanoid(),
       name: name,
       number: number,
     };
 
+
+    if (this.state.contacts.some(contact => contact.name === name)) {
+        alert(`${name} is already in contacts!`);
+        return;
+      };
+
     this.setState((prevState) => ({
       contacts: [...prevState.contacts, newContact], 
       name: ``,
       number: ``,
-    }))
+    }));
   };
 
   filterByName = event => {
@@ -50,19 +53,19 @@ export class App extends Component {
   };
 
   render() {
+    
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
     const filteredContacts = contacts.filter((contact) =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
+
     return (
       <div className={css.container}>
         <h2 className={css.title}>Phonebook</h2>
 
         <ContactForm
           contacts={this.state.contacts}
-          name={this.state.name}
-          number={this.state.number}
           onInputChange={this.onInputChange}
           handleAddContact={this.handleAddContact}
         />  
@@ -71,7 +74,7 @@ export class App extends Component {
 
         <Filter filter={this.state.filter} filterByName={this.filterByName}/>
 
-        <ContactList contacts={filteredContacts}/>
+        <ContactList contacts={filteredContacts}/> 
 
 
       </div>
